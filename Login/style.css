@@ -4,3 +4,24 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
+body{
+    background-image: up('./imagem/bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    height: auto; 
+}
+.container{
+    position: relative;
+    background-color: aliceblue;
+    width: 300px;
+    height: 400px;
+    border: 2px solid rgb(75, 133, 18);
+    border-radius: 10px;
+    box-shadow: black;
+}
