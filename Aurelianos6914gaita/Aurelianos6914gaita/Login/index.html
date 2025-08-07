@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Melhorado</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 320px;
+    }
+
+    .round {
+      background: #3b82f6;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 20px auto;
+      color: white;
+      font-size: 30px;
+    }
+
+    .wrap-input-label {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px 40px 10px 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #3b82f6;
+      outline: none;
+    }
+
+    /* Botão olho */
+    .eye-container {
+      position: absolute;
+      top: 36px;
+      right: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .eye-container i {
+      color: #888;
+      font-size: 18px;
+    }
+
+    p.esqueci {
+      font-size: 14px;
+      color: #3b82f6;
+      text-align: right;
+      margin: -10px 0 20px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    .error-div {
+      display: none;
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #f44336;
+      color: white;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      text-align: center;
+      width: 300px;
+    }
+
+    .error-div button {
+      margin-top: 15px;
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="round">
+      <i class="fa-solid fa-truck"></i>
+    </div>
+
+    <form id="loginForm" autocomplete="off">
+      <div class="wrap-input-label">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Insira seu nome" required />
+      </div>
+
+      <div class="wrap-input-label">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Insira sua senha" required />
+        <div class="eye-container" onclick="showPassword()" aria-label="Mostrar/Ocultar senha" role="button" tabindex="0">
+          <i id="eye" class="fa-regular fa-eye"></i>
+        </div>
+      </div>
+
+      <p class="esqueci" onclick="alert('Redirecionar para recuperação de senha')">Esqueci minha senha</p>
+
+      <button type="submit">LOGIN</button>
+    </form>
+  </div>
+
+  <div class="error-div" id="error-modal" role="alertdialog" aria-modal="true" aria-labelledby="error-title">
+    <h3 id="error-title">Credenciais incorretas</h3>
+    <button onclick="fecharError()" aria-label="Fechar erro">❌</button>
+  </div>
+
+  <script>
+    function showPassword() {
+      const senha = document.getElementById('senha');
+      const eye = document.getElementById('eye');
+
+      if (senha.type === 'password') {
+        senha.type = 'text';
+        eye.classList.remove('fa-eye');
+        eye.classList.add('fa-eye-slash');
+      } else {
+        senha.type = 'password';
+        eye.classList.remove('fa-eye-slash');
+        eye.classList.add('fa-eye');
+      }
+    }
+
+    function abrirError() {
+      const modal = document.getElementById('error-modal');
+      modal.style.display = 'block';
+    }
+
+    function fecharError() {
+      const modal = document.getElementById('error-modal');
+      modal.style.display = 'none';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const senha = document.getElementById('senha').value;
+
+      if (nome === '' || senha === '') {
+        alert('Por favor, preencha todos os campos!');
+        return;
+      }
+
+      // Login correto se nome = "Joao" e senha = "1234"
+      if (nome === 'Joao' && senha === '1234') {
+        alert('Login realizado com sucesso!');
+        // Coloque aqui o redirecionamento, se quiser:
+        // window.location.href = 'dashboard.html';
+      } else {
+        abrirError();
+      }
+    });
+
+    // Acessibilidade para o botão olho: ativar via teclado (Enter / Space)
+    const eyeContainer = document.querySelector('.eye-container');
+    eyeContainer.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showPassword();
+      }
+    });
+  </script>
+</body>
+
+</html>
