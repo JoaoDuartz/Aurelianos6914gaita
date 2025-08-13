@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="round">
+            <i class="fa-solid fa-truck logo"></i>
+        </div>
+
+        <div class="wrap-input-label">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" placeholder="Insira seu nome" />
+        </div>
+
+        <div class="wrap-input-label">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" placeholder="Insira sua senha" />
+            <img class="eye" src="./Images/eye.png" alt="Olhos" id="eye" onclick="showPassword()" />
+        </div>
+
+        <div class="error-message" id="error-msg">Nome ou senha incorretos!</div>
+
+        <button class="btn-login" onclick="login()">Entrar</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
